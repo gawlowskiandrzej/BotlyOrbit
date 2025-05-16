@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BotlyOrbit.GUI.Views"
-        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:cef="clr-namespace:CefSharp.WinForms;assembly=CefSharp.WinForms"
         mc:Ignorable="d"
         Title="Browser" Height="857" Width="1345">
-    <Grid>
-        <cef:ChromiumWebBrowser x:Name="browser" Address="{Binding Url}"/>
-    </Grid>
+    <WindowsFormsHost>
+        <cef:ChromiumWebBrowser x:Name="browser"/>
+    </WindowsFormsHost>
 </Window>

@@ -1,8 +1,5 @@
 ﻿using BotlyOrbit.GUI.Services;
 using BotlyOrbit.GUI.ViewModels;
-using CefSharp.Wpf;
-using System;
-using System.Diagnostics;
 using System.Windows;
 
 namespace BotlyOrbit.GUI.Views
@@ -15,7 +12,9 @@ namespace BotlyOrbit.GUI.Views
         public BrowserWindow()
         {
             InitializeComponent();
-            DataContext = new BrowserViewModel();
+            var browserModel =  new BrowserViewModel();
+            DataContext = browserModel;
+            browser.Load(browserModel.Url);
             browser.LifeSpanHandler = new LifeSpanHandler();
         }
 

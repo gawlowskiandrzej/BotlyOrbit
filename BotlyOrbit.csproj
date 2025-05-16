@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.props" Condition="Exists('packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.props')" />
+  <Import Project="packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.props" Condition="Exists('packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.props')" />
   <Import Project="packages\CefSharp.Common.75.1.141\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.75.1.141\build\CefSharp.Common.props')" />
   <Import Project="packages\cef.redist.x86.75.1.14\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.75.1.14\build\cef.redist.x86.props')" />
   <Import Project="packages\cef.redist.x64.75.1.14\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.75.1.14\build\cef.redist.x64.props')" />
@@ -64,6 +64,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,6 +77,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -133,9 +135,11 @@
     <Compile Include="Game\Entities\Entity.cs" />
     <Compile Include="Game\Entities\Ship.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="GUI\Helpers\CustomKeyboardHandler.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Models\BotModel.cs" />
     <Compile Include="GUI\Models\BrowserModel.cs" />
+    <Compile Include="GUI\Models\BrowserNavigator.cs" />
     <Compile Include="GUI\Models\GameModel.cs" />
     <Compile Include="GUI\Models\MapModel.cs" />
     <Compile Include="GUI\Models\StatsModel.cs" />
@@ -209,9 +213,9 @@
     <Error Condition="!Exists('packages\cef.redist.x86.75.1.14\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.75.1.14\build\cef.redist.x86.props'))" />
     <Error Condition="!Exists('packages\CefSharp.Common.75.1.141\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.75.1.141\build\CefSharp.Common.props'))" />
     <Error Condition="!Exists('packages\CefSharp.Common.75.1.141\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.75.1.141\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.props'))" />
-    <Error Condition="!Exists('packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.targets'))" />
+    <Error Condition="!Exists('packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.targets'))" />
   </Target>
   <Import Project="packages\CefSharp.Common.75.1.141\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.75.1.141\build\CefSharp.Common.targets')" />
-  <Import Project="packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.targets" Condition="Exists('packages\CefSharp.Wpf.75.1.141\build\CefSharp.Wpf.targets')" />
+  <Import Project="packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.targets" Condition="Exists('packages\CefSharp.WinForms.75.1.141\build\CefSharp.WinForms.targets')" />
 </Project>

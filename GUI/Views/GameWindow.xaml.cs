@@ -1,6 +1,6 @@
 ﻿using BotlyOrbit.GUI.Services;
 using BotlyOrbit.GUI.ViewModels;
-using CefSharp;
+using CefSharp.WinForms;
 using System.Windows;
 
 namespace BotlyOrbit.GUI.Views
@@ -10,11 +10,14 @@ namespace BotlyOrbit.GUI.Views
     /// </summary>
     public partial class GameWindow : Window
     {
+        public ChromiumWebBrowser Browser{ get; set; }
         public GameWindow(string url)
         {
             InitializeComponent();
-            DataContext = new GameViewModel(url);
-            brow.FrameLoadEnd += Brow_FrameLoadEnd;
+            Browser = new ChromiumWebBrowser();
+            Browser.Load(url);
+            myBrowserContainer.Child = Browser; // jeśli używasz jakiegoś kontenera
+            Browser.FrameLoadEnd += Brow_FrameLoadEnd;
         }
 
         private void Brow_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
@@ -23,6 +26,7 @@ namespace BotlyOrbit.GUI.Views
             {
                 var processFinder = new ProcessFinder();
                 processFinder.FindPid();
+                DataContext = new GameViewModel(Browser);
             }
         }
     }

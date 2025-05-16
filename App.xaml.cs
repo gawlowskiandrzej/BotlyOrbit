@@ -1,4 +1,4 @@
-﻿using CefSharp.Wpf;
+﻿using CefSharp.WinForms;
 using CefSharp;
 using System.IO;
 using System.Windows;
@@ -33,7 +33,6 @@ namespace BotlyOrbit
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Cef.Shutdown();
             base.OnExit(e);
         }
     }

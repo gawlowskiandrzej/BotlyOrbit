@@ -1,13 +1,21 @@
-﻿using System.ComponentModel;
+﻿using BotlyOrbit.GUI.Helpers;
+using BotlyOrbit.GUI.Models;
+using CefSharp.WinForms;
+using System.ComponentModel;
 
 namespace BotlyOrbit.GUI.ViewModels
 {
     internal class GameViewModel : INotifyPropertyChanged
     {
-        public string GameUrl { get; set; }
-        public GameViewModel(string url)
+        BrowserNavigator Navigator { get; set; }
+
+        public GameViewModel(ChromiumWebBrowser browser)
         {
-            GameUrl = url;
+            Navigator = new BrowserNavigator(browser.Width, browser.Height, browser.GetBrowser().GetHost(), 100, 0);
+            browser.KeyboardHandler = new CustomKeyboardHandler(() =>
+            {
+                Navigator.Click(); // lub dowolna inna metoda
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

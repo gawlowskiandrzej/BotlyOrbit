@@ -4,10 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BotlyOrbit.GUI.Views"
-        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         Title="Game" Height="800" Width="1345">
-    <Grid>
-        <cef:ChromiumWebBrowser x:Name="brow"  Address="{Binding GameUrl}"/>
-    </Grid>
+    <WindowsFormsHost x:Name="myBrowserContainer" />
 </Window>

@@ -1,11 +1,14 @@
-﻿using BotlyOrbit.GUI.Models;
+﻿using BotlyOrbit.GUI.Helpers;
+using BotlyOrbit.GUI.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace BotlyOrbit.GUI.ViewModels
 {
     public class BrowserViewModel : INotifyPropertyChanged
     {
+        BrowserNavigator Navigator;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,7 +26,9 @@ namespace BotlyOrbit.GUI.ViewModels
         public BrowserViewModel()
         {
             var browserModel = new BrowserModel();
+            
             Url = browserModel.InitialUrl;
+            
         }
 
 
