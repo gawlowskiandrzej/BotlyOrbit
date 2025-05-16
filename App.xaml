@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:BotlyOrbit"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/GUI/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/GUI/Styles/LabelStyles.xaml"/>
+                <ResourceDictionary Source="/GUI/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/GUI/Styles/TextBlockStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
