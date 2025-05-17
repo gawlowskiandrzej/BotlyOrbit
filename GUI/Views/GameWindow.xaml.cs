@@ -1,6 +1,8 @@
 ﻿using BotlyOrbit.GUI.Services;
 using BotlyOrbit.GUI.ViewModels;
 using CefSharp.WinForms;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace BotlyOrbit.GUI.Views
@@ -20,13 +22,16 @@ namespace BotlyOrbit.GUI.Views
             Browser.FrameLoadEnd += Brow_FrameLoadEnd;
         }
 
-        private void Brow_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
+        private async void Brow_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
         {
             if (e.Frame.IsMain)
             {
                 var processFinder = new ProcessFinder();
-                processFinder.FindPid();
-                DataContext = new GameViewModel(Browser);
+                var procId = processFinder.FindPid();
+
+                await Task.Delay(19000);
+                
+                DataContext = new GameViewModel(Browser, procId);
             }
         }
     }
