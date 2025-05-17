@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Documents;
+using System.Text;
 
 internal class MemoryManager
 {
-    private IntPtr processHandle { get; set; }
+    private static IntPtr processHandle { get; set; }
     public int procId;
 
     // Rights for memory regions
@@ -96,48 +96,58 @@ internal class MemoryManager
         processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, procId);
     }
 
-    public byte[] ReadBytes(IntPtr address, int size)
+    public static byte[] ReadBytes(IntPtr address, int size)
     {
         byte[] buffer = new byte[size];
         ReadProcessMemory(processHandle, address, buffer, size, out int bytesRead);
         return buffer;
     }
 
-    public int ReadInt(IntPtr address) => BitConverter.ToInt32(ReadBytes(address, 4), 0);
-    public long ReadLong(IntPtr address) => BitConverter.ToInt64(ReadBytes(address, 8), 0);
-    public double ReadDouble(IntPtr address) => BitConverter.ToDouble(ReadBytes(address, 8), 0);
-    public float ReadFloat(IntPtr address) => BitConverter.ToSingle(ReadBytes(address, 4), 0);
-    public bool ReadBoolean(IntPtr address) => BitConverter.ToBoolean(ReadBytes(address, 1), 0);
-    public IntPtr ReadPointer(IntPtr address) => new IntPtr(ReadLong(address));
-
-    public bool WriteBytes(IntPtr address, byte[] data)
+    public static int ReadInt(IntPtr address) => BitConverter.ToInt32(ReadBytes(address, 4), 0);
+    public static long ReadLong(IntPtr address) => BitConverter.ToInt64(ReadBytes(address, 8), 0);
+    public static double ReadDouble(IntPtr address) => BitConverter.ToDouble(ReadBytes(address, 8), 0);
+    public static float ReadFloat(IntPtr address) => BitConverter.ToSingle(ReadBytes(address, 4), 0);
+    public static bool ReadBoolean(IntPtr address) => BitConverter.ToBoolean(ReadBytes(address, 1), 0);
+    public static IntPtr ReadPointer(IntPtr address) => new IntPtr(ReadLong(address));
+    public static string ReadString(IntPtr address, int maxLength, Encoding encoding = null)
     {
-        return WriteProcessMemory(processHandle, address, data, data.Length, out int bytesWritten) && bytesWritten == data.Length;
+        encoding = Encoding.UTF8;
+        byte[] buffer = ReadBytes(address, maxLength);
+
+        int nullIndex = Array.IndexOf(buffer, (byte)0x00); // znajdź terminator
+        if (nullIndex >= 0)
+            buffer = buffer.Take(nullIndex).ToArray();
+
+        return encoding.GetString(buffer);
     }
 
-    public bool WriteInt(IntPtr address, int value)
+    public bool WriteString(IntPtr address, string text, Encoding encoding = null, bool nullTerminated = true)
     {
-        return WriteBytes(address, BitConverter.GetBytes(value));
+        encoding = Encoding.UTF8;
+        byte[] stringBytes = encoding.GetBytes(text);
+
+        if (nullTerminated)
+        {
+            byte[] terminated = new byte[stringBytes.Length + 1];
+            Array.Copy(stringBytes, terminated, stringBytes.Length);
+            return WriteBytes(address, terminated);
+        }
+        else
+        {
+            return WriteBytes(address, stringBytes);
+        }
     }
 
-    public bool WriteLong(IntPtr address, long value)
-    {
-        return WriteBytes(address, BitConverter.GetBytes(value));
-    }
+    public static bool WriteBytes(IntPtr address, byte[] data) => WriteProcessMemory(processHandle, address, data, data.Length, out int bytesWritten) && bytesWritten == data.Length;
 
-    public bool WriteDouble(IntPtr address, double value)
-    {
-        return WriteBytes(address, BitConverter.GetBytes(value));
-    }
+    public static bool WriteInt(IntPtr address, int value) => WriteBytes(address, BitConverter.GetBytes(value));
 
-    public bool WriteFloat(IntPtr address, float value)
-    {
-        return WriteBytes(address, BitConverter.GetBytes(value));
-    }
-
-    public bool WriteBoolean(IntPtr address, bool value)
-    {
-        return WriteBytes(address, BitConverter.GetBytes(value));
-    }
-
+    public static bool WriteLong(IntPtr address, long value) => WriteBytes(address, BitConverter.GetBytes(value));
+    
+    public static bool WriteDouble(IntPtr address, double value) => WriteBytes(address, BitConverter.GetBytes(value));
+    
+    public static bool WriteFloat(IntPtr address, float value) => WriteBytes(address, BitConverter.GetBytes(value));
+    
+    public static bool WriteBoolean(IntPtr address, bool value) => WriteBytes(address, BitConverter.GetBytes(value));
+   
 }

@@ -133,10 +133,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Game\Entities\Entity.cs" />
+    <Compile Include="Game\Entities\NPC.cs" />
+    <Compile Include="Game\Entities\Portal.cs" />
     <Compile Include="Game\Entities\Ship.cs" />
+    <Compile Include="Game\GameTools\SWFList.cs" />
+    <Compile Include="Game\Interfaces\IClicable.cs" />
+    <Compile Include="Game\Interfaces\IUpdatable.cs" />
     <Compile Include="Game\Managers\InitManager.cs" />
+    <Compile Include="Game\Objects\Durability.cs" />
+    <Compile Include="Game\Objects\Location2D.cs" />
+    <Compile Include="Game\Objects\PlayerInfo.cs" />
+    <Compile Include="Game\Objects\ShipInfo.cs" />
+    <Compile Include="Game\Objects\Trait.cs" />
     <Compile Include="Game\Other\MemoryPatters.cs" />
-    <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\Other\Updatable.cs" />
+    <Compile Include="Game\Objects\Player.cs" />
     <Compile Include="GUI\Helpers\CustomKeyboardHandler.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Models\BotModel.cs" />
