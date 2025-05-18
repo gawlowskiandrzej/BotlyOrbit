@@ -132,7 +132,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Game\Entities\Box.cs" />
     <Compile Include="Game\Entities\Entity.cs" />
+    <Compile Include="Game\Entities\EntityType.cs" />
     <Compile Include="Game\Entities\NPC.cs" />
     <Compile Include="Game\Entities\Portal.cs" />
     <Compile Include="Game\Entities\Ship.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Game\Modules\Collector.cs" />
     <Compile Include="Game\Modules\Lotter.cs" />
     <Compile Include="Game\Objects\Durability.cs" />
+    <Compile Include="Game\Objects\EntityFactory.cs" />
     <Compile Include="Game\Objects\EntityList.cs" />
     <Compile Include="Game\Objects\Location2D.cs" />
     <Compile Include="Game\Objects\PlayerInfo.cs" />

@@ -18,12 +18,11 @@ namespace BotlyOrbit.Game.Objects
 
             for (int i = 0; i < Size; i++) 
             {
-                // TODO: Check what is that entity
 
                 Entity ent = new Entity();
-                ent.update(Address + (i * 8));
-
-                Entities.Add(ent);
+                IntPtr entAddr = Address + (i * 8);
+                ent.update(entAddr);
+                Entities.Add(EntityFactory.Create(entAddr));
             }
         }
     }

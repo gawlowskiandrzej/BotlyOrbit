@@ -10,6 +10,10 @@ namespace BotlyOrbit.Game.Entities
         public ShipInfo ShipInfo { get; set; } = new ShipInfo();
         public Durability Durability { get; set; } = new Durability();
 
+        public Ship(IntPtr address)
+        {
+            update(address);
+        }
         public override void update(IntPtr address)
         {
             base.update(address);

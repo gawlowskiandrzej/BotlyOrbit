@@ -39,6 +39,14 @@ namespace BotlyOrbit.Game.Entities
                     return;
             }
         }
+        public string GetAssetString()
+        {
+            IntPtr firstTrait = TraitsList.Objects[0];
+            IntPtr asd = MemoryManager.ReadPointer(MemoryManager.ReadPointer(MemoryManager.ReadPointer(firstTrait + 0x3F)+0x20)+0x18);
+            IntPtr next = MemoryManager.ReadPointer(MemoryManager.ReadPointer(asd + 0x8) + 0x10);
+            IntPtr next2 = MemoryManager.ReadPointer(next+0x18);
+            return MemoryManager.ReadString(next2).Trim();
+        }
 
         public void click()
         {

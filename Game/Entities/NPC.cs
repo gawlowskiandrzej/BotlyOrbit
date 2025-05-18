@@ -1,7 +1,6 @@
-﻿namespace BotlyOrbit.Game.Entities
-{
-    internal class NPC : Ship
-    {
+﻿using System;
 
-    }
+namespace BotlyOrbit.Game.Entities
+{
+  
 }

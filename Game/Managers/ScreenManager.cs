@@ -1,4 +1,5 @@
-﻿using BotlyOrbit.Game.Other;
+﻿using BotlyOrbit.Game.Objects;
+using BotlyOrbit.Game.Other;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ namespace BotlyOrbit.Game.Managers
     internal class ScreenManager : Updatable
     {
         public HeroManager HeroManager { get; set; } = new HeroManager();
+        public EntityList EntityList { get; set; } = new EntityList();
         public override void update(IntPtr address)
         {
             base.update(address);
@@ -23,6 +25,7 @@ namespace BotlyOrbit.Game.Managers
                 if (HeroManager.IsValid())
                     break;
             }
+            EntityList.update(address);
         }
     }
 }
