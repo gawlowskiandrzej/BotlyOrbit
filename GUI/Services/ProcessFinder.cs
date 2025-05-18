@@ -1,17 +1,23 @@
 ﻿using System.Diagnostics;
 using System;
+using System.Windows.Documents;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BotlyOrbit.GUI.Services
 {
     internal class ProcessFinder
     {
         public string ProcessName { get; set; }
+        List<int> ProcessIdList { get; set; } = new List<int>();
         public ProcessFinder(string processName = "CefSharp.BrowserSubprocess")
         {
             ProcessName = processName;
         }
         public int FindPid()
         {
+            // TODO: Make precise search for module
+            // Search processes and find if it has flash player
             var processes = Process.GetProcessesByName(ProcessName);
 
             foreach (var proc in processes)
@@ -21,7 +27,7 @@ namespace BotlyOrbit.GUI.Services
                     string cmdLine = GetCommandLine(proc);
                     if (cmdLine.Contains("--type=ppapi"))
                     {
-                        return proc.Id;           
+                        ProcessIdList.Add(proc.Id);           
                     }
                 }
                 catch
@@ -29,7 +35,8 @@ namespace BotlyOrbit.GUI.Services
                     return -1;
                 }
             }
-            return -1;
+
+            return ProcessIdList.LastOrDefault();
         }
         string GetCommandLine(Process process)
         {

@@ -11,6 +11,7 @@ namespace BotlyOrbit.GUI.ViewModels
         public MainWindowViewModel()
         {
             OpenBrowserCommand = new RelayCommand(OpenBrowserWindow);
+            OpenBrowserWindow();
         }
 
         private void OpenBrowserWindow()

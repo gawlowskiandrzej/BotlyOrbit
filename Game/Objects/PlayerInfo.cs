@@ -14,7 +14,7 @@ namespace BotlyOrbit.Game.Objects
         {
             base.update(address);
 
-            Username = MemoryManager.ReadString(MemoryManager.ReadPointer(address + 40) +16 , 20);
+            Username = MemoryManager.ReadString(MemoryManager.ReadPointer(address + 40));
             FactionId = MemoryManager.ReadInt(MemoryManager.ReadPointer(address+72) + 40);
 
         }

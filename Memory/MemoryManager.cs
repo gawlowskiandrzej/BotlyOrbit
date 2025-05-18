@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -17,7 +16,7 @@ internal class MemoryManager
     private const uint PAGE_NOACCESS = 0x01;
     private const uint MEM_PRIVATE = 0x20000;
 
-    public List<IntPtr> QueryMemory(byte[] pattern)
+    public static List<IntPtr> QueryMemory(byte[] pattern)
     {
         List<IntPtr> results = new List<IntPtr>();
         IntPtr currentAddress = IntPtr.Zero;
@@ -57,6 +56,43 @@ internal class MemoryManager
             currentAddress = new IntPtr(currentAddress.ToInt64() + mbi.RegionSize.ToInt64());
         }
 
+        return results;
+    }
+
+    public static List<IntPtr> QueryMemoryInt(int value)
+    {
+        List<IntPtr> results = new List<IntPtr>();
+        IntPtr currentAddress = IntPtr.Zero;
+
+        byte[] targetBytes = BitConverter.GetBytes(value);
+
+        while (VirtualQueryEx(processHandle, currentAddress, out MEMORY_BASIC_INFORMATION mbi, (uint)Marshal.SizeOf(typeof(MEMORY_BASIC_INFORMATION))))
+        {
+            bool isCommitted = mbi.State == MEM_COMMIT;
+            bool isPrivate = mbi.Type == MEM_PRIVATE;
+            bool isReadableWritable = (mbi.Protect & PAGE_READWRITE) != 0;
+            bool isNotNoAccess = (mbi.Protect & PAGE_NOACCESS) == 0;
+            bool isNotGuard = (mbi.Protect & PAGE_GUARD) == 0;
+
+            if (isCommitted && isPrivate && isReadableWritable && isNotNoAccess && isNotGuard && mbi.BaseAddress.ToInt64() > 0x100000000)
+            {
+                byte[] buffer = new byte[(int)mbi.RegionSize];
+                if (ReadProcessMemory(processHandle, mbi.BaseAddress, buffer, buffer.Length, out int bytesRead))
+                {
+                    for (int i = 0; i <= bytesRead - 4; i++)
+                    {
+                        if (buffer[i] == targetBytes[0] &&
+                            buffer[i + 1] == targetBytes[1] &&
+                            buffer[i + 2] == targetBytes[2] &&
+                            buffer[i + 3] == targetBytes[3])
+                        {
+                            results.Add(new IntPtr(mbi.BaseAddress.ToInt64() + i));
+                        }
+                    }
+                }
+            }
+            currentAddress = new IntPtr(currentAddress.ToInt64() + mbi.RegionSize.ToInt64());
+        }
         return results;
     }
 
@@ -109,16 +145,27 @@ internal class MemoryManager
     public static float ReadFloat(IntPtr address) => BitConverter.ToSingle(ReadBytes(address, 4), 0);
     public static bool ReadBoolean(IntPtr address) => BitConverter.ToBoolean(ReadBytes(address, 1), 0);
     public static IntPtr ReadPointer(IntPtr address) => new IntPtr(ReadLong(address));
-    public static string ReadString(IntPtr address, int maxLength, Encoding encoding = null)
+    public static string ReadString(IntPtr address)
     {
-        encoding = Encoding.UTF8;
-        byte[] buffer = ReadBytes(address, maxLength);
+        if (address == IntPtr.Zero)
+            return "ERROR";
 
-        int nullIndex = Array.IndexOf(buffer, (byte)0x00); // znajdź terminator
-        if (nullIndex >= 0)
-            buffer = buffer.Take(nullIndex).ToArray();
+        int flags = ReadInt(address + 36);
+        int width = (flags & 0x00000001);
+        int size = ReadInt(address + 32) << width;
+        int type = (flags & 0x00000006) >> 1;
 
-        return encoding.GetString(buffer);
+        if (size > 512 || size < 0)
+            return "ERROR";
+
+        byte[] bytes;
+
+        if (type == 2)
+            bytes = ReadBytes(ReadPointer(ReadPointer(address + 24) + 16) + ReadInt(address + 16), size);
+        else
+            bytes = ReadBytes(ReadPointer(address + 16), size);
+
+        return width == 0 ? Encoding.Default.GetString(bytes) : System.Text.Encoding.Default.GetString(bytes);
     }
 
     public bool WriteString(IntPtr address, string text, Encoding encoding = null, bool nullTerminated = true)

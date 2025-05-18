@@ -6,7 +6,7 @@ using System;
 
 namespace BotlyOrbit.Game.Entities
 {
-    abstract class Entity : Updatable, IClicable
+    internal class Entity : Updatable, IClicable
     {
         public int Id { get; set; }
         public int Radius { get; set; }
@@ -16,9 +16,14 @@ namespace BotlyOrbit.Game.Entities
         public SWFList TraitsList { get; set; } = new SWFList();
         public Trait Clickable { get; set; } = new Trait();
 
+
         public override void update(IntPtr address)
         {
             base.update(address);
+
+            // TODO adding prop to ent
+            // Add id and rest
+
             Location.update(Address + 63);
             TraitsList.update(MemoryManager.ReadPointer(Address + 47) + 48 + 16);
 
