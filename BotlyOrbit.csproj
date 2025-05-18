@@ -146,6 +146,7 @@
     <Compile Include="Game\Managers\HeroManager.cs" />
     <Compile Include="Game\Managers\InitManager.cs" />
     <Compile Include="Game\Managers\MainApplicationManager.cs" />
+    <Compile Include="Game\Managers\MapManager.cs" />
     <Compile Include="Game\Managers\ScreenManager.cs" />
     <Compile Include="Game\Modules\Collector.cs" />
     <Compile Include="Game\Modules\Lotter.cs" />

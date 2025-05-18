@@ -23,10 +23,10 @@ namespace BotlyOrbit.Game.Managers
                 if (initPtr.Count > 1)
                     return false;
 
-                var MainPtr = MemoryManager.ReadPointer(IntPtr.Subtract(initPtr[0], 228));
-                MainApplicationManager.update(MemoryManager.ReadPointer(MainPtr + 1344));
-                ScreenManager.update(MemoryManager.ReadPointer(MainApplicationManager.Address + 504));
-                GuiManager.update(MemoryManager.ReadPointer(MainApplicationManager.Address + 512));
+                var MainPtr = IntPtr.Subtract(initPtr[0], 228);
+                MainApplicationManager.update(MainPtr + 1344);
+                ScreenManager.update(MainApplicationManager.Address + 504);
+                GuiManager.update(MainApplicationManager.Address + 512);
 
                 return true;
             }

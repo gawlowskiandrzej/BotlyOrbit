@@ -17,7 +17,7 @@ namespace BotlyOrbit.Game.Entities
         public override void update(IntPtr address)
         {
             base.update(address);
-
+            EntityType = EntityType.Ship;
             PlayerInfo.update(Address + 247);
             ShipInfo.update(Address + 231);
             Durability.update(Address + 183);

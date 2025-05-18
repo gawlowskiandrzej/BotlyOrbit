@@ -8,7 +8,7 @@ namespace BotlyOrbit.Game.Managers
     internal class ScreenManager : Updatable
     {
         public HeroManager HeroManager { get; set; } = new HeroManager();
-        public EntityList EntityList { get; set; } = new EntityList();
+        public MapManager MapManager { get; set; } = new MapManager();
         public override void update(IntPtr address)
         {
             base.update(address);
@@ -25,7 +25,8 @@ namespace BotlyOrbit.Game.Managers
                 if (HeroManager.IsValid())
                     break;
             }
-            EntityList.update(address);
+
+            MapManager.update(Address + 256);
         }
     }
 }

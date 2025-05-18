@@ -15,9 +15,9 @@ namespace BotlyOrbit.Game.Objects
         {
             base.update(address);
 
-            Radius = MemoryManager.ReadInt(address + 39);
-            Priority = MemoryManager.ReadInt(address + 43);
-            Enabled = MemoryManager.ReadInt(address + 47);
+            Radius = MemoryManager.ReadInt(Address + 39);
+            Priority = MemoryManager.ReadInt(Address + 43);
+            Enabled = MemoryManager.ReadInt(Address + 47);
         }
 
         public bool IsValid() => (Radius >= 0 && Radius < 4000 && Priority > -4 && Priority < 1000 && (Enabled == 1 || Enabled == 0));

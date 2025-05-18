@@ -9,10 +9,11 @@ namespace BotlyOrbit.Game.Other
         public IntPtr Address { get; set; } = IntPtr.Zero;
         public virtual void update(IntPtr address)
         {
-            if (IsValid())
-                Address = MemoryManager.ReadPointer(address);
+            Address = MemoryManager.ReadPointer(address);
+            if (!IsValid())
+                Address = IntPtr.Zero;
         }
-        public virtual bool IsValid() => Address != IntPtr.Zero && (Address.ToInt64() > 0 && Address.ToInt64() < 0x7FFFFFFFF);
+        public virtual bool IsValid() => Address != IntPtr.Zero && (Address.ToInt64() > 0 && Address.ToInt64() < 0x7fffffffffff);
         public int readIntFromDerefrenced(int offset) => MemoryManager.ReadInt(MemoryManager.ReadPointer(Address + offset) + 40);
     }
 }

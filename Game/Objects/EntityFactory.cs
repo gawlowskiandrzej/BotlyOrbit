@@ -17,13 +17,14 @@ namespace BotlyOrbit.Game.Objects
 
         public static Entity Create(IntPtr address)
         {
-            Entity ent = null;
-            ent = new Entity();
+            Entity ent = new Entity();
             ent.update(address);
             if (ent.Address == IntPtr.Zero)
                 return null;
 
-            switch (GetEntityTypeFromName(ent.GetAssetString()))
+            ent.AssetName = ent.GetAssetString();
+            if (ent.AssetName == "ERROR") return ent;
+            switch (GetEntityTypeFromName(ent.AssetName))
             {
                 case EntityType.Box: return new Box(address);
                 case EntityType.Loot: return new Box(address);

@@ -11,8 +11,8 @@ namespace BotlyOrbit.Game.Objects
         public override void update(IntPtr address)
         {
             base.update(address);
-            XPos = MemoryManager.ReadDouble(address + 32);
-            YPos = MemoryManager.ReadDouble(address + 40);
+            XPos = MemoryManager.ReadDouble(Address + 32);
+            YPos = MemoryManager.ReadDouble(Address + 40);
         }
     }
 }

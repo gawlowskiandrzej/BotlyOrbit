@@ -2,9 +2,10 @@
 {
     internal enum EntityType
     {
+        Unknown,
         Box,
         Loot,
         Ship,
-        Unknown
+        
     }
 }
