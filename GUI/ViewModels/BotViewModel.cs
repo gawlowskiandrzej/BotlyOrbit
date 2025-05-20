@@ -7,11 +7,14 @@ namespace BotlyOrbit.GUI.ViewModels
     {
         public ICommand StartCollectingCM { get; set; }
         public ICommand StartFightingCM { get; set; }
+        public EntitiesViewModel EntitiesViewModel { get; set; }
+
 
         public BotViewModel()
         {
             StartCollectingCM = new RelayCommand(StartCollecting);
             StartFightingCM = new RelayCommand(StartFighting);
+            EntitiesViewModel = new EntitiesViewModel(new Game.Objects.EntityList());
         }
 
 

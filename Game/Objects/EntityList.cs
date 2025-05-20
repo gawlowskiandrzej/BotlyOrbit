@@ -45,7 +45,6 @@ namespace BotlyOrbit.Game.Objects
 
                 }
             }
-
         }
     }
 }

@@ -112,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Views\EntitiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Views\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +177,7 @@
     <Compile Include="GUI\Services\ProcessFinder.cs" />
     <Compile Include="GUI\ViewModels\BotViewModel.cs" />
     <Compile Include="GUI\ViewModels\BrowserViewModel.cs" />
+    <Compile Include="GUI\ViewModels\EntitiesViewModel.cs" />
     <Compile Include="GUI\ViewModels\GameViewModel.cs" />
     <Compile Include="GUI\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="GUI\ViewModels\MapViewModel.cs" />
@@ -182,6 +187,9 @@
     </Compile>
     <Compile Include="GUI\Views\BrowserWindow.xaml.cs">
       <DependentUpon>BrowserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Views\EntitiesView.xaml.cs">
+      <DependentUpon>EntitiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Views\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>

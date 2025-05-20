@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="BotlyOrbit.GUI.Views.EntitiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BotlyOrbit.GUI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid ItemsSource="{Binding EntityList.Entities}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding AssetName}"/>
+                <DataGridTextColumn Header="Xpos" Binding="{Binding Xpos}"/>
+                <DataGridTextColumn Header="Ypos" Binding="{Binding Ypos}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

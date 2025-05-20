@@ -9,27 +9,37 @@
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}"/>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0.3*"/>
-        </Grid.ColumnDefinitions>
-        <local:MapView Padding="15" Grid.Row="1"/>
+    <TabControl>
+        <TabItem Header="Game map">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <local:MapView Padding="15" Grid.Row="1"/>
 
-        <Grid  Grid.Column="1" Grid.Row="1" Margin="0 10 0 15">
-            <StackPanel >
-                <StackPanel.Resources>
-                    <Style TargetType="Button" BasedOn="{StaticResource MenuButtons}"/>
-                </StackPanel.Resources>
-                <Button Command="{Binding StartCollectingCM}" Content="Start Collecting"/>
-                <Button Command="{Binding StartFightingCM}" Content="Start Fighting"/>
-            </StackPanel>
-            <local:StatsView VerticalAlignment="Bottom"/>
-        </Grid>
-        
-    </Grid>
+                <Grid  Grid.Column="1" Grid.Row="1" Margin="0 10 0 15">
+                    <StackPanel >
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource MenuButtons}"/>
+                        </StackPanel.Resources>
+                        <Button Command="{Binding StartCollectingCM}" Content="Start Collecting"/>
+                        <Button Command="{Binding StartFightingCM}" Content="Start Fighting"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Player">
+            <local:StatsView VerticalAlignment="Top"/>
+        </TabItem>
+        <TabItem Header="Entities">
+            <local:EntitiesView DataContext="{Binding EntitiesViewModel}"/>
+        </TabItem>
+    </TabControl>
+    
 </Window>
