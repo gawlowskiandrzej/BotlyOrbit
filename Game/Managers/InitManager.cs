@@ -9,6 +9,7 @@ namespace BotlyOrbit.Game.Managers
         MainApplicationManager MainApplicationManager { get; set; } = new MainApplicationManager();
         ScreenManager ScreenManager { get; set; } = new ScreenManager();
         GuiManager GuiManager { get; set; } = new GuiManager();
+
         public InitManager(int procId)
         {
             new MemoryManager(procId);

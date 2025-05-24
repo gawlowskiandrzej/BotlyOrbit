@@ -146,12 +146,15 @@
     <Compile Include="Game\Interfaces\IClicable.cs" />
     <Compile Include="Game\Interfaces\IModule.cs" />
     <Compile Include="Game\Interfaces\IUpdatable.cs" />
+    <Compile Include="Game\Managers\EventManager.cs" />
     <Compile Include="Game\Managers\GuiManager.cs" />
     <Compile Include="Game\Managers\HeroManager.cs" />
     <Compile Include="Game\Managers\InitManager.cs" />
     <Compile Include="Game\Managers\MainApplicationManager.cs" />
     <Compile Include="Game\Managers\MapManager.cs" />
+    <Compile Include="Game\Managers\MiniMapManager.cs" />
     <Compile Include="Game\Managers\ScreenManager.cs" />
+    <Compile Include="Game\Managers\ViewManager.cs" />
     <Compile Include="Game\Modules\Collector.cs" />
     <Compile Include="Game\Modules\Lotter.cs" />
     <Compile Include="Game\Objects\Durability.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Game\Objects\Location2D.cs" />
     <Compile Include="Game\Objects\PlayerInfo.cs" />
     <Compile Include="Game\Objects\ShipInfo.cs" />
+    <Compile Include="Game\Objects\Sprite.cs" />
     <Compile Include="Game\Objects\Trait.cs" />
     <Compile Include="Game\Other\MemoryPatters.cs" />
     <Compile Include="Game\Other\Module.cs" />

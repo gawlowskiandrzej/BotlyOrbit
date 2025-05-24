@@ -9,6 +9,9 @@ namespace BotlyOrbit.Game.Managers
     {
         public HeroManager HeroManager { get; set; } = new HeroManager();
         public MapManager MapManager { get; set; } = new MapManager();
+        public ViewManager ViewManager { get; set; } = new ViewManager();
+        public MiniMapManager MiniMapManager { get; set; } = new MiniMapManager();
+        public EventManager EventManager { get; set; } = new EventManager();
         public override void update(IntPtr address)
         {
             base.update(address);
@@ -27,6 +30,9 @@ namespace BotlyOrbit.Game.Managers
             }
 
             MapManager.update(Address + 256);
+            ViewManager.update(Address + 216);
+            MiniMapManager.update(Address + 224);
+            EventManager.update(Address + 224);
         }
     }
 }
