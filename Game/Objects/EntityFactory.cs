@@ -11,7 +11,6 @@ namespace BotlyOrbit.Game.Objects
         static readonly Dictionary<Regex, EntityType> TypeRegexMap = new Dictionary<Regex, EntityType>()
         {
             { new Regex(@"^box_.*", RegexOptions.IgnoreCase), EntityType.Box },
-            { new Regex(@"^ship_.*", RegexOptions.IgnoreCase), EntityType.Ship },
             { new Regex(@"^ore_.*", RegexOptions.IgnoreCase), EntityType.Loot },
         };
 
@@ -21,16 +20,18 @@ namespace BotlyOrbit.Game.Objects
             ent.update(address);
             if (ent.Address == IntPtr.Zero)
                 return null;
-
-            ent.AssetName = ent.GetAssetString();
-            if (ent.AssetName == "ERROR") return ent;
+            
             switch (GetEntityTypeFromName(ent.AssetName))
             {
                 case EntityType.Box: return new Box(address);
                 case EntityType.Loot: return new Box(address);
                 case EntityType.Ship: return new Ship(address);
                 default:
-                    return ent;
+                    {
+                        if (ent.IsShip())
+                            return new Ship(address);  
+                        return ent;
+                    }
             }
         }
 

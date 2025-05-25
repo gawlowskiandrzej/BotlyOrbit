@@ -1,4 +1,6 @@
-﻿using BotlyOrbit.Game.Managers;
+﻿using BotlyOrbit.Game.GameTools;
+using BotlyOrbit.Game.Managers;
+using BotlyOrbit.Game.Objects;
 using BotlyOrbit.GUI.Helpers;
 using BotlyOrbit.GUI.Models;
 using BotlyOrbit.GUI.Views;
@@ -13,14 +15,20 @@ namespace BotlyOrbit.GUI.ViewModels
 
         public GameViewModel(ChromiumWebBrowser browser, int procId)
         {
-            Navigator = new BrowserNavigator(browser.Width, browser.Height, browser.GetBrowser().GetHost(), 0, -100);
+            Navigator = new BrowserNavigator(browser.Width, browser.Height, browser.GetBrowser().GetHost(), 0, 0);
             browser.KeyboardHandler = new CustomKeyboardHandler(() =>
             {
                 Navigator.Click(); // lub dowolna inna metoda
             });
 
             var init = new InitManager(procId);
-            BotWindow botWindow = new BotWindow(ref init);
+            BotViewModel botViewModel = new BotViewModel(ref init);
+            botViewModel.ClickCenterEvent += BotViewModel_ClickCenterEvent;
+        }
+
+        private void BotViewModel_ClickCenterEvent(object sender, Location2D loc)
+        {
+            Navigator.Click(loc.XPos, loc.YPos);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

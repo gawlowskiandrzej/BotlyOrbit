@@ -20,13 +20,16 @@ namespace BotlyOrbit.Game.Managers
 
             if (id == 0) return;
 
-            List<IntPtr> addresses = MemoryManager.QueryMemoryInt(id);
-
-            foreach (IntPtr item in addresses)
+            if (HeroManager.Address != IntPtr.Zero)
             {
-                HeroManager.update(item);
-                if (HeroManager.IsValid())
-                    break;
+                List<IntPtr> addresses = MemoryManager.QueryMemoryInt(id);
+
+                foreach (IntPtr item in addresses)
+                {
+                    HeroManager.update(item);
+                    if (HeroManager.IsValid())
+                        break;
+                }
             }
 
             MapManager.update(Address + 256);

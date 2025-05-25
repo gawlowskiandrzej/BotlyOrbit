@@ -2,6 +2,8 @@
 using BotlyOrbit.Game.Other;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 
 namespace BotlyOrbit.Game.Objects
 {
@@ -32,16 +34,24 @@ namespace BotlyOrbit.Game.Objects
                 if (!ent.IsInValid(mapManaAddr))
                 {
                     Entity createdEnt = EntityFactory.Create(entAddr);
-                    Entities.Add(createdEnt);
-                    switch (createdEnt.EntityType)
+                    if (i != 0 && createdEnt != null)
+                        createdEnt.DistanceToPlayer = createdEnt.GetDistance(Entities.First()?.Location);
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        case EntityType.Box: Boxes.Add((Box)createdEnt);
-                            break;
-                        case EntityType.Loot: Boxes.Add((Box)createdEnt);
-                            break;
-                        case EntityType.Ship: Ships.Add((Ship)createdEnt);
-                            break;
-                    }
+                        Entities.Add(createdEnt);
+                        switch (createdEnt.EntityType)
+                        {
+                            case EntityType.Box:
+                                Boxes.Add((Box)createdEnt);
+                                break;
+                            case EntityType.Loot:
+                                Boxes.Add((Box)createdEnt);
+                                break;
+                            case EntityType.Ship:
+                                Ships.Add((Ship)createdEnt);
+                                break;
+                        }
+                    });
 
                 }
             }

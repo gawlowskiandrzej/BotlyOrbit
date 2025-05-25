@@ -5,20 +5,68 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BotlyOrbit.GUI.Views"
              xmlns:view="clr-namespace:BotlyOrbit.GUI.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <d:UserControl.DataContext>
         <view:EntitiesViewModel/>
     </d:UserControl.DataContext>
-    <Grid>
-        <DataGrid ItemsSource="{Binding EntityList.Entities}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding AssetName}"/>
-                <DataGridTextColumn Header="Xpos" Binding="{Binding Xpos}"/>
-                <DataGridTextColumn Header="Ypos" Binding="{Binding Ypos}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="DataGrid" BasedOn="{StaticResource BasedStyle}"/>
+    </UserControl.Resources>
+    <TabControl>
+        <TabItem Header="All entities">
+            <DataGrid ItemsSource="{Binding EntityList.Entities}" SelectedItem="{Binding SelectedEntity, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="0.6*" Header="Id" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding EntityType}"/>
+                    <DataGridTextColumn Width="1.5*" Header="Name" Binding="{Binding AssetName}"/>
+                    <DataGridTextColumn Width="*" Header="Current X" Binding="{Binding Location.XPos}"/>
+                    <DataGridTextColumn Width="*" Header="Current Y" Binding="{Binding Location.YPos}"/>
+                    <DataGridTextColumn Width="*" Header="Distance to player" Binding="{Binding DistanceToPlayer, StringFormat=N2}"/>
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick" >
+                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"
+                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Ships">
+            <DataGrid ItemsSource="{Binding EntityList.Ships}" SelectedItem="{Binding SelectedEntity, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="0.6*" Header="Id" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="1.5*" Header="Name" Binding="{Binding PlayerInfo.Username}"/>
+                    <DataGridTextColumn Width="*" Header="Current X" Binding="{Binding Location.XPos}"/>
+                    <DataGridTextColumn Width="*" Header="Current Y" Binding="{Binding Location.YPos}"/>
+                    <DataGridTextColumn Width="*" Header="Distance to player" Binding="{Binding DistanceToPlayer, StringFormat=N2}"/>
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"
+                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Collectables">
+            <DataGrid ItemsSource="{Binding EntityList.Boxes}" SelectedItem="{Binding SelectedEntity, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="0.6*" Header="Id" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding EntityType}"/>
+                    <DataGridTextColumn Width="1.5*" Header="Name" Binding="{Binding AssetName}"/>
+                    <DataGridTextColumn Width="*" Header="Current X" Binding="{Binding Location.XPos}"/>
+                    <DataGridTextColumn Width="*" Header="Current Y" Binding="{Binding Location.YPos}"/>
+                    <DataGridTextColumn Width="*" Header="Distance to player" Binding="{Binding DistanceToPlayer, StringFormat=N2}"/>
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding DoubleClickCommand}"
+                                   CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </TabItem>
+    </TabControl>
 </UserControl>

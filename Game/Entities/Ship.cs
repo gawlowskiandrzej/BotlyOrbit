@@ -5,7 +5,6 @@ namespace BotlyOrbit.Game.Entities
 {
     internal class Ship : Entity
     {
-        public string Name { get; set; } = "Ship";
         public PlayerInfo PlayerInfo { get; set; } = new PlayerInfo();
         public ShipInfo ShipInfo { get; set; } = new ShipInfo();
         public Durability Durability { get; set; } = new Durability();

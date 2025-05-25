@@ -11,7 +11,7 @@ namespace BotlyOrbit.GUI.ViewModels
     internal class EntitiesViewModel : INotifyPropertyChanged
     {
         private EntityList _entityList;
-        public ICommand DoubleClick { get; set; }
+        public ICommand DoubleClickCommand { get; set; }
         public event EventHandler<Entity> EntityDoubleClicked;
 
 
@@ -23,8 +23,7 @@ namespace BotlyOrbit.GUI.ViewModels
         public EntitiesViewModel(EntityList entities)
         {
             EntityList = entities;
-            DoubleClick = new RelayCommand<object>(OnRowDoubleClicked);
-
+            DoubleClickCommand = new RelayCommand<object>(OnRowDoubleClicked);
         }
 
         private void OnRowDoubleClicked(object selectedElement)

@@ -15,10 +15,10 @@ namespace BotlyOrbit.GUI.Views
             InitializeComponent();
             DataContext = new BotViewModel();
         }
-        internal BotWindow(ref InitManager initManager)
+        internal BotWindow(BotViewModel model)
         {
             InitializeComponent();
-            DataContext = new BotViewModel(ref initManager);
+            DataContext = model;
         }
     }
 }

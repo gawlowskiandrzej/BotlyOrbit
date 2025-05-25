@@ -17,6 +17,7 @@ namespace BotlyOrbit.Game.Managers
         public double Width { get; set; }
         public double Height { get; set; }
 
+
         public override void update(IntPtr address)
         {
             base.update(address);
@@ -33,6 +34,7 @@ namespace BotlyOrbit.Game.Managers
             BoundY = MemoryManager.ReadDouble(updated + 88);
             BoundMaxX = MemoryManager.ReadDouble(updated + 112);
             BoundMaxY = MemoryManager.ReadDouble(updated + 120);
+
             Width = BoundMaxX - BoundX;
             Height = BoundMaxY - BoundY;
         }

@@ -8,8 +8,6 @@ namespace BotlyOrbit.Game.Managers
         public override void update(IntPtr address)
         {
             base.update(address);
-
-            
         }
     }
 }

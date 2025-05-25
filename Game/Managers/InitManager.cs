@@ -13,6 +13,7 @@ namespace BotlyOrbit.Game.Managers
         public InitManager(int procId)
         {
             new MemoryManager(procId);
+            InitValues();
         }
         public bool InitValues()
         {
@@ -35,6 +36,18 @@ namespace BotlyOrbit.Game.Managers
                 return false;
             }
             
+        }
+        public void Update()
+        {
+            try
+            {
+                ScreenManager.update(MainApplicationManager.Address + 504);
+                GuiManager.update(MainApplicationManager.Address + 512);
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show($"Cant update bot: {e.Message}");
+            }
         }
     }
 }

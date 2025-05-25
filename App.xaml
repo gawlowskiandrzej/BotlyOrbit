@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="/GUI/Styles/LabelStyles.xaml"/>
                 <ResourceDictionary Source="/GUI/Styles/TextBoxStyles.xaml"/>
                 <ResourceDictionary Source="/GUI/Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="/GUI/Styles/DataGridStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

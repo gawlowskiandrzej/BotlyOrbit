@@ -6,6 +6,7 @@
         Box,
         Loot,
         Ship,
-        
+        Player,
+        NPC
     }
 }
