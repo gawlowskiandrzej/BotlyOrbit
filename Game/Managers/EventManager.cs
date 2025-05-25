@@ -5,14 +5,16 @@ namespace BotlyOrbit.Game.Managers
 {
     internal class EventManager : Updatable
     {
-        public int Xdest { get; set; }
-        public int Ydest { get; set; }
+        public double Xdest { get; set; }
+        public double Ydest { get; set; }
         public override void update(IntPtr address)
         {
             base.update(address);
 
-            Xdest = MemoryManager.ReadInt(Address + 44);
-            Ydest = MemoryManager.ReadInt(Address + 48);
+            IntPtr intPtr = MemoryManager.ReadPointer(Address+64);
+
+            Xdest = MemoryManager.ReadDouble(intPtr + 44);
+            Ydest = MemoryManager.ReadDouble(intPtr + 48);
         }
     }
 }

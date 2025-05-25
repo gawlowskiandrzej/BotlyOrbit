@@ -4,7 +4,7 @@ using System.Net;
 
 namespace BotlyOrbit.Game.Other
 {
-    abstract class Updatable : IUpdatable
+    public abstract class Updatable : IUpdatable
     {
         public IntPtr Address { get; set; } = IntPtr.Zero;
         public virtual void update(IntPtr address)

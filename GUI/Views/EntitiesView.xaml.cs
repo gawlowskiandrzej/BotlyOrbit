@@ -12,5 +12,10 @@ namespace BotlyOrbit.GUI.Views
         {
             InitializeComponent();
         }
+
+        private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

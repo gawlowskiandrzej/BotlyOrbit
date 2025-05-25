@@ -1,5 +1,7 @@
-﻿using BotlyOrbit.GUI.ViewModels;
+﻿using BotlyOrbit.Game.Managers;
+using BotlyOrbit.GUI.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 
 namespace BotlyOrbit.GUI.Views
 {
@@ -12,6 +14,11 @@ namespace BotlyOrbit.GUI.Views
         {
             InitializeComponent();
             DataContext = new BotViewModel();
+        }
+        internal BotWindow(ref InitManager initManager)
+        {
+            InitializeComponent();
+            DataContext = new BotViewModel(ref initManager);
         }
     }
 }

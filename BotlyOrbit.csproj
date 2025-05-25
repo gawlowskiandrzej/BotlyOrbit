@@ -170,6 +170,7 @@
     <Compile Include="Game\Other\Updatable.cs" />
     <Compile Include="Game\Objects\Player.cs" />
     <Compile Include="GUI\Helpers\CustomKeyboardHandler.cs" />
+    <Compile Include="GUI\Helpers\ParametrizedRelayCommand.cs" />
     <Compile Include="GUI\Helpers\RelayCommand.cs" />
     <Compile Include="GUI\Models\BotModel.cs" />
     <Compile Include="GUI\Models\BrowserModel.cs" />

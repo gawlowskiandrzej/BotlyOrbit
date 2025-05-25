@@ -6,17 +6,15 @@ namespace BotlyOrbit.Game.Managers
 {
     internal class InitManager
     {
-        MainApplicationManager MainApplicationManager { get; set; } = new MainApplicationManager();
-        ScreenManager ScreenManager { get; set; } = new ScreenManager();
-        GuiManager GuiManager { get; set; } = new GuiManager();
+        public MainApplicationManager MainApplicationManager { get; set; } = new MainApplicationManager();
+        public ScreenManager ScreenManager { get; set; } = new ScreenManager();
+        public GuiManager GuiManager { get; set; } = new GuiManager();
 
         public InitManager(int procId)
         {
             new MemoryManager(procId);
-            Init();
-
         }
-        public bool Init()
+        public bool InitValues()
         {
             try
             {

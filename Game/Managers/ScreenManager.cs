@@ -32,7 +32,7 @@ namespace BotlyOrbit.Game.Managers
             MapManager.update(Address + 256);
             ViewManager.update(Address + 216);
             MiniMapManager.update(Address + 224);
-            EventManager.update(Address + 224);
+            EventManager.update(Address + 200);
         }
     }
 }

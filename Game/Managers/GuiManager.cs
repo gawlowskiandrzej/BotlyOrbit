@@ -3,7 +3,7 @@ using System;
 
 namespace BotlyOrbit.Game.Managers
 {
-    internal class GuiManager : Updatable
+    public class GuiManager : Updatable
     {
         public override void update(IntPtr address)
         {
